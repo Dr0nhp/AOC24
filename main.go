@@ -13,7 +13,7 @@ import (
 func main() {
 	arr_l, arr_r, _, err := reader.ReadData("data/inp_d1.txt")
 	if err != nil {
-		log.Fatalf("Fehler beim Lesen der Datei: %v", err)
+		log.Fatalf("Error while reading the file: %v", err)
 	}
 
 	solution1 := p1d1.Solution(arr_l, arr_r)
