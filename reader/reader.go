@@ -8,25 +8,22 @@ import (
 	"strings"
 )
 
-func ReadData(filename string) ([]int, []int, []string, error) {
+func ReadData1(filename string) ([]int, []int, error) {
 	file, err := os.Open(filename)
 	if err != nil {
-		return nil, nil, nil, fmt.Errorf("error opening file: %v", err)
+		return nil, nil, fmt.Errorf("error opening file: %v", err)
 	}
 	defer file.Close()
 
 	reader := bufio.NewReader(file)
 	var arr_l []int
 	var arr_r []int
-	var lines []string
 
 	for {
 		line, err := reader.ReadString('\n')
 		if err != nil {
 			break
 		}
-
-		lines = append(lines, line)
 
 		replacer := strings.NewReplacer(",", "")
 		line = replacer.Replace(line)
@@ -45,5 +42,19 @@ func ReadData(filename string) ([]int, []int, []string, error) {
 			}
 		}
 	}
-	return arr_l, arr_r, lines, err
+	return arr_l, arr_r, err
+}
+
+func ReadData2(filename string) [][]int {
+	file, _ := os.Open(filename)
+	defer file.Close()
+	reader := bufio.NewReader(file)
+
+	for {
+		line, _ := reader.ReadString('\n')
+
+	}
+
+	return line
+
 }
