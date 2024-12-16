@@ -45,16 +45,33 @@ func ReadData1(filename string) ([]int, []int, error) {
 	return arr_l, arr_r, err
 }
 
-func ReadData2(filename string) [][]int {
-	file, _ := os.Open(filename)
+func ReadData2(filename string) ([][]int, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, err
+	}
 	defer file.Close()
 	reader := bufio.NewReader(file)
+	var result [][]int
 
 	for {
-		line, _ := reader.ReadString('\n')
+		line, err := reader.ReadString('\n')
+		if err != nil {
+			break
+		}
+		line = strings.TrimSpace(line)
+		numbers := strings.Fields(line)
 
+		var intNumbers []int
+		for _, numStr := range numbers {
+			num, err := strconv.Atoi(numStr)
+			if err != nil {
+				return nil, err
+			}
+			intNumbers = append(intNumbers, num)
+		}
+		result = append(result, intNumbers)
 	}
 
-	return line
-
+	return result, nil
 }

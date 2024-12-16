@@ -1,11 +1,29 @@
 package p1
 
-func Solution(arr []string) []string {
+import (
+	"fmt"
+	"math"
+)
 
-	/*	var solution3 []string
-		solution3 = arr*/
+func Solution(arr [][]int) int {
+	var save int
 
-	return arr
+	for i := 0; i < len(arr); i++ {
+		for j := 0; j < len(arr[i])-1; j++ {
+			compL := float64(arr[i][j])
+			compR := float64(arr[i][j+1])
+
+			if math.Abs(compL-compR) < 3 && math.Abs(compL-compR) != 0 {
+				fmt.Print(compL, compR, "\n")
+
+				save++
+			} else {
+				break
+			}
+		}
+	}
+
+	return save
 }
 
 /*
